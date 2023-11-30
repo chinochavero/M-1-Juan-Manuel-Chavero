@@ -7,6 +7,7 @@ import { startConnection } from "./src/settings/database.js";
 import { config } from "./src/settings/config.js";
 import { postRouter } from "./src/routes/post.routes.js";
 import { validateToken } from "./src/middlewares/validate-token.js";
+import { commentRouter } from "./src/routes/comment.routes.js";
 
 
 const app = express();
@@ -21,13 +22,9 @@ app.use(morgan("dev"));
 
 app.use("/api", userRouter)
 app.use("/api/post", validateToken, postRouter)
+app.use("/api/comment", validateToken, commentRouter)
 
 
-
-
-
-
-//test de servidor
 
 app.listen(config.PORT, async () => {
     await startConnection();

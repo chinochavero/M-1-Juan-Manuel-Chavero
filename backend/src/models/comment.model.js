@@ -6,7 +6,11 @@ const CommentSchema = new Schema({
     },
     author: {
         type: Schema.Types.ObjectId,
-        ref: "Post",
+        ref: "User",
+    },
+    post: {
+        type: Schema.Types.ObjectId,
+        ref: "Post"
     }
 }, {
     timestamps: true,

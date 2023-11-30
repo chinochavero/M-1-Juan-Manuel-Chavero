@@ -8,7 +8,7 @@ export const ctrlCreateUser = async (req, res) => {
         res.status(201).json(newUser)
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: "No se pudo crear el usuario" })
+        res.status(500).json({ error: "No se pudo crear usuario" })
         
     }
 };
@@ -44,11 +44,11 @@ export const ctrlLoginUser = async (req, res) => {
         if (!user) return res.status(404).json({ error: "Usuario no encontrado"});
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({ error: "Credenciales no validas" });
+        if (!isMatch) return res.status(400).json({ error: "Credenciales no válidas" });
 
         const token = await createJWT({ userId: user._id });
         res.status(200).json({ token, user });
     } catch (error) {
-        res.status(500).json({ error: "usuario imposible de logear" });
+        res.status(500).json({ error: "Error al iniciar sesión" });
     }
 };

@@ -2,7 +2,15 @@ import { Schema, model, Types } from "mongoose";
 import * as bcrypt from "bcrypt";
 
 const UserSchema = new Schema({
+    avatar: {
+        type: String,
+    },
     username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    email: {
         type: String,
         required: true,
         unique: true,
@@ -10,11 +18,6 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
     },
     posts: [
         {
