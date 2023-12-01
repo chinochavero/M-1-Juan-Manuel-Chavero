@@ -1,0 +1,16 @@
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#buscador {
+    width: 500px;
+    align-self: center;
+}
+
+#btn-search {
+    width: 120px;
+    align-self: center;
+    
+}

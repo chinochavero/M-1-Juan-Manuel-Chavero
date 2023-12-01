@@ -1,0 +1,35 @@
+.card {
+    width: 700px;
+
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 5px 1px rgb(207, 206, 206);
+}
+
+.card-title {
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.card-img-top {
+    display: flex;
+    align-self: center;
+    width: 650px;
+    height: 380px;
+    border: 2px solid black;
+    object-fit: cover;      
+}
+
+.card-text {
+    text-align: left;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.fecha {
+    font-size: 13px ;
+    text-align: right;
+    margin-right: 30px;
+}
