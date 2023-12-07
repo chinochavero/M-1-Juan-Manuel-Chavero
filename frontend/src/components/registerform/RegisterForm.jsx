@@ -33,9 +33,7 @@ function RegisterForm() {
       password,
       email,
     };
-
-    console.log(user)     
-
+    
     const req = await fetch(`${API_URL}/register`, {
       method: "POST",
       body: JSON.stringify(user),

@@ -5,8 +5,7 @@ import Post from "../components/posteo/Post";
 import styles from "../styles/Post.module.css";
   
 
-function AllpostsPage() {
-   
+function AllpostsPage() {   
     const [posts, setPosts] = useState([]); 
     
     const getPost = useCallback(() => {

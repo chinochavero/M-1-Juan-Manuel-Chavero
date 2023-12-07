@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DeletePostModel from "../deletepost/DeletePostModel";
 import "./postitem.css";
 import { HiOutlineTrash, HiOutlinePencilAlt, HiOutlineChat  } from "react-icons/hi"; 
+import CreateCommentModal from "../comments/Comments";
 
 const PostItem = ({ post, getPost, onClick }) => {  
   const modalId = useId();
@@ -26,16 +27,25 @@ const PostItem = ({ post, getPost, onClick }) => {
           <Link style={{ fontSize: "30px", color: "green" }} className="icon-editar">
           <HiOutlinePencilAlt />
           </Link>
-            <Link style={{ fontSize: "30px", color: "blue" }}className="icon-crear-comentario">
-                <HiOutlineChat />
-            </Link>
             <Link onClick={(e) => {
               e.stopPropagation()
               }}
               data-bs-toggle="modal"
               data-bs-target={"#modal" + post._id}
-              style={{ fontSize: "30px", color: "red" }} className="icon-borrar"
-            >
+              style={{ fontSize: "30px", color: "blue" }}className="icon-crear-comentario">
+                <HiOutlineChat />
+            </Link>
+            <CreateCommentModal
+                  getPost={getPost}
+                  modalId={modalId}
+                  postId={post._id}
+                />
+            <Link onClick={(e) => {
+              e.stopPropagation()
+              }}
+              data-bs-toggle="modal"
+              data-bs-target={"#modal" + post._id}
+              style={{ fontSize: "30px", color: "red" }} className="icon-borrar">
                 <HiOutlineTrash />
             </Link>                    
                 <DeletePostModel
