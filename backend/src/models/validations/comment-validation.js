@@ -1,7 +1,12 @@
 import { header, param, body } from "express-validator";
 import { applyValidations } from "../../middlewares/applyvalidator.js";
+import { isValidObjectId } from "mongoose";
 
 export const createCommentValidation = [
+    param("postId")
+        .notEmpty().withMessage("El parametro no debe estar vacio")
+        .isString().withMessage("El parametro debe ser un string")
+        .custom(isValidObjectId).withMessage("El parametro debe ser un ID valido"),
     body("description")
     .isString().withMessage("El campo debe ser un string"),
     
@@ -9,7 +14,23 @@ export const createCommentValidation = [
 ];
 
 export const listCommentValidation = [
-    header("authorization").exists(),
+   param("postId")
+        .notEmpty().withMessage("El parametro no debe estar vacio")
+        .isString().withMessage("El parametro debe ser un string")
+        .custom(isValidObjectId).withMessage("El parametro debe ser un ID valido"),
 
-    applyValidations
+    applyValidations,
+];
+
+export const getCommentValidation = [
+    param("postId")
+    .notEmpty().withMessage('El parametro no debe estar vacio.')
+    .isString().withMessage('El parametro debe ser un string.')
+    .custom(isValidObjectId).withMessage('El parametro debe ser un ID valido'),
+    param("commentId")
+    .notEmpty().withMessage('El parametro no debe estar vacio.')
+    .isString().withMessage('El parametro debe ser un string.')
+    .custom(isValidObjectId).withMessage('El parametro debe ser un ID valido'),
+
+    applyValidations,
 ];

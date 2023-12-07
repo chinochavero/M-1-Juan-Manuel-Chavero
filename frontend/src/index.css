@@ -12,13 +12,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  display: grid;
-  place-content: center;
+  display: flex;   
+  justify-content: center;
+  width: 100vw;
   min-height: 100vh;
-}
+  
+} 
 
-.music {
+/* .music {
   width: 420px;
   padding: 10px 20px;
   border-radius: 12px;
@@ -32,4 +33,4 @@
   outline: none;
   font-size: 30px;
   color: red;
-}
+}  */

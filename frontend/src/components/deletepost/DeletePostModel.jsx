@@ -1,12 +1,14 @@
 import { useId, useRef } from "react";
 import { API_URL } from "../../utils/consts";
+import "./deletepost.css"
+
 
 const DeletePostModel = ({ postId, getPost }) => {
     const labelId = useId();
     const ref = useRef(null);
+    
 
     const handleDelete = () => {
-        console.log("delete post", postId);
         fetch(`${API_URL}/post/${postId}`, {
             method: "DELETE",
             headers: {
@@ -18,9 +20,9 @@ const DeletePostModel = ({ postId, getPost }) => {
             ref.current.click();
             getPost();
         });
-    };
-
-    return (
+    };  
+    
+      return ( 
         <div
       className="modal fade"
       id={"modal" + postId}
@@ -31,7 +33,7 @@ const DeletePostModel = ({ postId, getPost }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id={labelId}>
-              Delete Playlist
+              Eliminar Post
             </h1>
             <button
               type="button"
@@ -41,29 +43,24 @@ const DeletePostModel = ({ postId, getPost }) => {
             ></button>
           </div>
           <div className="modal-body">
-            Are you sure you want to delete this playlist?
+            Estas seguro que deseas eliminar el Post?
           </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-              ref={ref}
-            >
-              Close
+          <div className="modal-footer" onClick={(e) => {
+            e.stopPropagation()
+          }}>
+            <button type="button" className="btn-cerrar" id="btn-cerrar" data-bs-dismiss="modal" ref={ref}>
+              Cerrar
             </button>
             <button
-              type="button"
-              className="btn btn-danger"
-              onClick={handleDelete}
-            >
-              Delete
+              type="button" className="btn-eliminar" onClick={handleDelete}>
+              Eliminar
             </button>
           </div>
         </div>
       </div>
     </div>
-    );
+    )
+    ;
 };
 
 export default DeletePostModel;

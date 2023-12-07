@@ -8,14 +8,8 @@ const PlayItem = ({ playlist, getPlaylist, onClick }) => {
   const modalId = useId();
 
   return (
-    <div
-      key={playlist._id}
-      className={styles.item}
-      onClick={(e) => {
-        // stop propagation to avoid triggering the onClick of the parent
-
-        e.stopPropagation();
-
+    <div key={playlist._id} className={styles.item} onClick={(e) => {        
+        e.stopPropagation();   // stop propagation to avoid triggering the onClick of the parent
         onClick();
       }}
     >

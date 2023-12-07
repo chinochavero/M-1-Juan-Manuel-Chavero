@@ -1,0 +1,35 @@
+.btn-cerrar {
+    display: flex;
+    justify-content: center;
+    padding: 8px 40px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    border-width: 0.5px;
+    border-color: rgb(48, 48, 48);
+    margin-right: 10px;
+    box-shadow: 0px 2px 5px;
+} 
+
+.btn-cerrar:hover {
+    transform: scale(1.05);
+}
+
+.btn-eliminar {
+    display: flex;
+    justify-content: center;
+    padding: 8px 40px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.945);
+    border-width: 0.5px;
+    border-color: #DC3545;
+    box-shadow: 0px 2px 5px;
+} 
+
+
+.btn-eliminar:hover {
+  background-color: #DC3545;
+  transition: 0.5s;
+  transform: scale(1.05);
+}

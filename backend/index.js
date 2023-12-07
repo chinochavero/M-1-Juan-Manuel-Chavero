@@ -21,8 +21,9 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 app.use("/api", userRouter)
+app.use("/api/allposts", postRouter)
 app.use("/api/post", validateToken, postRouter)
-app.use("/api/comment", validateToken, commentRouter)
+app.use("/api/comments", validateToken, commentRouter)
 
 
 

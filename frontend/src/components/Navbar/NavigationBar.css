@@ -1,16 +1,29 @@
-.navbar {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+#navbar-container {
+    height: 50px;
+    align-content: center;
+    width: 800px;
+    
 }
 
-#buscador {
-    width: 500px;
-    align-self: center;
+#input-search {
+    width: 250px;
+    height: 30px;
 }
 
 #btn-search {
-    width: 120px;
+    width: 100px;
+    height: 35px;
     align-self: center;
-    
+    margin: 0;
+    padding: 0;
+    border: 2px solid rgba(0, 128, 128, 0.35);
+}
+
+.nav {
+    display: inline-flex;
+    justify-content: left; 
+}
+
+.nav-item {  
+    margin-right: 230px;
 }

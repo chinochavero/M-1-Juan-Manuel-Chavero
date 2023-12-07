@@ -1,6 +1,11 @@
+.container-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .card {
     width: 700px;
-
     border-radius: 20px;
     margin-bottom: 20px;
     box-shadow: 2px 2px 5px 1px rgb(207, 206, 206);
@@ -28,8 +33,43 @@
     margin-right: 25px;
 }
 
-.fecha {
-    font-size: 13px ;
-    text-align: right;
-    margin-right: 30px;
+.fecha > .fecha-text{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    height: 15px;
+    font-size: 13px;
+    margin-right: 40px;
+}
+
+/* Caja de comentarios */
+
+#comment-card {
+    display: flex;
+    margin-bottom: 0px;   
+    padding: 10px;
+}
+
+#comment-subcon {        
+    margin: 5px
+}
+
+#card-image {    
+    margin-right: 8px;
+}
+
+
+
+.icon-editar { 
+    display: inline-flex;
+    margin-left: 45px;    
+}
+
+.icon-crear-comentario { 
+    display: inline-flex;
+    margin-left: 13px;    
+}
+.icon-borrar { 
+    display: inline-flex;
+    margin-left: 10px;  
 }

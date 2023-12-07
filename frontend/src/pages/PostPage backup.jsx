@@ -5,9 +5,10 @@ import { AuthContext } from "../providers/AuthProvider";
 import Post from "../components/posteo/Post";
 import NavbarDos from "../components/Navbar/NavigationBar";
 
+
 function PostPage () {
-  const [posts, setPosts] = useState([]);
-  
+  const [posts, setPosts] = useState([]);  
+
   const { auth } = useContext(AuthContext);
     
   const getPost = useCallback(() => {
@@ -28,17 +29,15 @@ function PostPage () {
   }, [auth, getPost]);
 
   return (
-    <div>
-      
-          <NavbarDos />
-    
-      <div className="">
-           <h1 className={styles.h1}>Mis Posts</h1>
-           {posts.length === 0 ? <p className={styles.p}>No tienes creado ningún Post.</p> : null}
-             <main className="">
-           <Post getPost={getPost} posts={posts} />
-         </main>
-       </div>
+    <div className="navbar">
+      <NavbarDos />
+      <div className={styles.container}>
+          <h1 className={styles.h1}>Mis Posts</h1>
+          {posts.length === 0 ? <p className={styles.p}>No tienes creado ningún Post.</p> : null}
+          <main className={styles.section}>
+          <Post getPost={getPost} posts={posts} />
+          </main>
+      </div>
     </div>
   ); 
 };

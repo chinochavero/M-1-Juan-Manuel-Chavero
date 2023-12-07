@@ -1,32 +1,19 @@
-import { useState } from "react";
+import "./comments.css";
 
-function CommentBox() {
-    const [comment, setComment] = useState("");
-    const [comments, setComments] = useState([]);
-
-    const onClickHandler = () => {
-        setComments((comments) => [...comments, comment]);
-    };
-    const onChangeHandler = (e) => {
-        setComment(e.target.value);
-    };
-    return (
-        <div className="main.container">
-            {comments.map((text) => {
-                <div className="comment-container">{text}</div>               
-            })}
-            <div className="comment-flexbox">
-                <h3 className="comment-text">Comment</h3>
-                <textarea value={comment}
-                onChange={onChangeHandler}
-                className="input-box"
-                />
-            <button onClick={onClickHandler} className="comment-button">
-                Submit
-            </button>
+    const CommentBox = ({ post, getPost }) => {
+      (
+         <div>
+            <div>
+              <form>
+              <label htmlFor="comment-text">Deja tu comentario:</label><br />
+              <textarea type="text" id="comment-text" name="textbox" className="comment-box"/>
+            <div className="submit">
+               <button className="submit-btn" id="submit">Enviar</button>
             </div>
-        </div>
-    );
-};
+               </form>
+            </div>
+         </div>
+        )
+    };
 
 export default CommentBox;

@@ -18,13 +18,9 @@ function RegisterForm() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-
-    
+    e.preventDefault();    
 
     const formData = new FormData(e.target);
-
     
     const username = formData.get("username");
     const avatar = formData.get("avatar");
@@ -38,8 +34,7 @@ function RegisterForm() {
       email,
     };
 
-    console.log(user)
-     
+    console.log(user)     
 
     const req = await fetch(`${API_URL}/register`, {
       method: "POST",
@@ -56,7 +51,6 @@ function RegisterForm() {
       
     navigate("/login");
   };
-
 
 return (
   <div className="container-fluid">
