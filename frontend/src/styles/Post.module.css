@@ -51,3 +51,7 @@
     justify-content: right;
     margin-right: 150px;
 }
+
+#comment-container {
+    background-color: aqua;
+}

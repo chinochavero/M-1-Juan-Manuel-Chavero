@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
 }));
 app.use(helmet());
 app.use(morgan("dev"));
@@ -23,7 +23,7 @@ app.use(morgan("dev"));
 app.use("/api", userRouter)
 app.use("/api/allposts", postRouter)
 app.use("/api/post", validateToken, postRouter)
-app.use("/api/comments", validateToken, commentRouter)
+app.use("/api/comments", validateToken, commentRouter) //validateToken
 
 
 

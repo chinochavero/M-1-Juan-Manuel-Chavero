@@ -106,7 +106,16 @@ export const ctrlDeletePost = async (req, res) => {
 
 export const ctrlGetAllPost = async (req, res) => {
     try {
-        const posts = await PostModel.find();
+        const posts = await PostModel.find()
+        .populate("author", ["username"]) 
+        .populate("comments", ["description", "author", "post"])
+        .populate({
+            path: 'comments',
+            populate: {
+              path: 'author',
+              model: 'User'
+            }
+          });
         if(!posts) return res.status(404)
         return res.status(200).json(posts)
     } catch (error) {

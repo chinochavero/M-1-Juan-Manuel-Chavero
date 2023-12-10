@@ -1,40 +1,42 @@
-import { useCallback, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 import { API_URL } from "../utils/consts";
-import NavbarDos from "../components/Navbar/NavigationBar"; 
-import Post from "../components/posteo/Post";
-import styles from "../styles/Post.module.css";
-  
+import PostItem from "../components/postitem/PostItem";
+import NavbarDos from "../components/Navbar/NavigationBar";
 
-function AllpostsPage() {   
-    const [posts, setPosts] = useState([]); 
-    const [post, setPost] = useState({ post:[], author:"", comments:[] })
-    
-    const getPost = useCallback(() => {
-    
-    fetch(`${API_URL}/allposts/public`, {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then((res) => res.json())
-    .then((data) => setPosts(data))
-    .catch((err) => console.log(err));
 
-    })
-    useEffect(() => {
-        getPost(); 
-    });
-  
+const IdPostPage = () => {
+    const { postId } = useParams();      
+    const [post, setPost] = useState({ author:"", comments:[] });
+    const { auth } = useContext(AuthContext);
+    
+
+    const getPost = () => {
+        fetch(`${API_URL}/post/${postId}`, {
+            headers: {
+                Authorization: auth.token,
+            },
+        })
+        .then((res) => {return res.json()})
+        .then((data) => {setPost(data)});
+    
+    };
+
+     useEffect(() => {
+        getPost();
+     }, [postId, auth]);
+
     return (
-    <div>
-      <NavbarDos />
-        <div className="">
-          <h1 className={styles.h1}>Los secretos del viajero</h1>
-          {posts.length === 0 ? <p className={styles.p}>No tienes creado ningún Post.</p> : null}
-          <main className="">
-            <Post getPost={getPost} posts={posts} />          
-          </main>
-          <div>            
+        <div>
+            <div>
+                <NavbarDos />
+            </div>
+        <div>
+        <PostItem getPost={getPost} key={post._id} post={post} onClick={() => {
+            navigate(`/post/${post._id}`)}} />
+        </div>
+        <div>            
           {post.comments.map((comment) => {              
             return (                   
               <div className="row d-flex justify-content-center" id="comment-container">
@@ -51,12 +53,10 @@ function AllpostsPage() {
                   </div>
                 </div>
               </div>
-            )})}      
-        </div>
-        </div>
+       )})}      
     </div>
-  ); 
-    
+    </div>
+    )
 };
 
-export default AllpostsPage;
+export default IdPostPage;

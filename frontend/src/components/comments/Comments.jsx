@@ -30,17 +30,14 @@ const CreateCommentModal = ({ postId, getPost }) => {
    };
 
    return (
-      <div
-      className="modal fade"
-      id={"modal" + postId}
-      aria-labelledby={labelId}
-      aria-hidden="true"
-    >
+      <div className="modal fade" id={"comment-modal" + postId} aria-labelledby={labelId} aria-hidden="true" onClick={(e) => {
+        e.stopPropagation();
+      }}>
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id={labelId}>
-              Eliminar Post
+              Dinos en que estas pensando:
             </h1>
             <button
               type="button"
@@ -50,7 +47,7 @@ const CreateCommentModal = ({ postId, getPost }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <textarea name="comment-area" id="commentbox" cols="55" rows="1" value={comment} onChange={handleInputChange}></textarea>
+            <textarea name="comment-area" id="commentbox" cols="55" rows="3" value={comment} onChange={handleInputChange}></textarea>
           </div>
           <div className="modal-footer" onClick={(e) => {
             e.stopPropagation()
@@ -59,8 +56,8 @@ const CreateCommentModal = ({ postId, getPost }) => {
               Cerrar
             </button>
             <button
-              type="button" className="btn-eliminar" onClick={handleSubmit}>
-              Eliminar
+              type="button" className="btn-submit" onClick={handleSubmit}>
+              Enviar
             </button>
           </div>
         </div>

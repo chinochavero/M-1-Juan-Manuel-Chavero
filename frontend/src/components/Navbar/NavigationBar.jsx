@@ -8,7 +8,9 @@ const NavbarDos = () => {
         <div className="container-fluid">
           <a className="navbar-brand">Posts</a>
             <ul className="nav">
-                <Link className="nav-item" to="/post">Inicio</Link>
+                <li><Link className="nav-item" to="/post">Inicio</Link></li>
+                <li><Link className="nav-item" to="/allposts">Inicio</Link></li>
+                
             </ul>
           <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" id="input-search" />

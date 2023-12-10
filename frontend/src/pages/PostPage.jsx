@@ -29,15 +29,13 @@ function PostPage () {
 
   return (
     <div>
-      
-          <NavbarDos />
-    
+      <NavbarDos />
       <div className="">
            <h1 className={styles.h1}>Mis Posts</h1>
            {posts.length === 0 ? <p className={styles.p}>No tienes creado ningún Post.</p> : null}
              <main className="">
-           <Post getPost={getPost} posts={posts} />
-         </main>
+               <Post getPost={getPost} posts={posts} />
+             </main>
        </div>
     </div>
   ); 

@@ -24,6 +24,6 @@
     justify-content: left; 
 }
 
-.nav-item {  
-    margin-right: 230px;
+li {
+    width: 110px;
 }

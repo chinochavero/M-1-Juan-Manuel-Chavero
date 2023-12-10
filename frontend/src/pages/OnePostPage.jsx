@@ -3,14 +3,13 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { API_URL } from "../utils/consts";
 import PostItem from "../components/postitem/PostItem";
-import Post from "../components/posteo/Post";
 import NavbarDos from "../components/Navbar/NavigationBar";
+
 
 const IdPostPage = () => {
     const { postId } = useParams();      
     const [post, setPost] = useState({ author:"", comments:[] });
     const { auth } = useContext(AuthContext);
-    
 
     const getPost = () => {
         fetch(`${API_URL}/post/${postId}`, {
@@ -20,13 +19,12 @@ const IdPostPage = () => {
         })
         .then((res) => {return res.json()})
         .then((data) => {setPost(data)});
-    
     };
 
      useEffect(() => {
         getPost();
      }, [postId, auth]);
-
+     
     return (
         <div>
             <div>
@@ -53,8 +51,8 @@ const IdPostPage = () => {
                   </div>
                 </div>
               </div>
-       )})}      
-    </div>
+            )})}      
+        </div>
     </div>
     )
 };
