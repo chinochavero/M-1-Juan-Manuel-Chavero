@@ -83,3 +83,11 @@ form{
 	justify-items: center;
 	margin-right: 10px;
 }
+
+#master_container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: auto;
+	justify-content: center;
+}

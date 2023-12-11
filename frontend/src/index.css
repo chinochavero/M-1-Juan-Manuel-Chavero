@@ -16,21 +16,10 @@
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  
+  background-image: url(images/Background_image.jpg);
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  background-position: center center;
 } 
 
-/* .music {
-  width: 420px;
-  padding: 10px 20px;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-}
-
-.delete-button {
-  background-color: #0000;
-  border: none;
-  outline: none;
-  font-size: 30px;
-  color: red;
-}  */

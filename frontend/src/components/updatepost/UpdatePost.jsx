@@ -1,6 +1,8 @@
 import { useContext, useId, useRef } from "react";
 import { API_URL } from "../../utils/consts";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import "./updatepost.css"
 
 const UpdatePostModel = ({ post, postId, getPost }) => {
     const labelId = useId();
@@ -12,6 +14,8 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
     const handleUpdate = () => {
         const formElement = document.getElementById("form_data");
         const formData = new FormData(formElement);
+        const title = formData.get("title")
+        const description = formData.get("description")
            
         fetch(`${API_URL}/post/${postId}`, {
             method: "PATCH",
@@ -26,9 +30,17 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
             }),
         })
         .then((res) => {
-            if (!res.ok) return alert("Error al actualizar el post");
+            if (auth.user._id !== post.author._id) return alert("No eres el creador del post")
+          
+            if (title === "" || description === "" ) return Swal.fire({
+              confirmButtonColor: "#14A44D",
+              icon: "error",
+              title: "Oops...",
+              text: "Por favor completa todos los campos",
+            });
             ref.current.click();
             getPost();
+           
         })
     }
     return (
@@ -39,7 +51,7 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id={labelId}>
-                    Eliminar Post
+                    Actualizar Post
                   </h1>
                   <button
                     type="button"
@@ -49,9 +61,12 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
                   ></button>
                 </div>
                 <form className="modal-body" id="form_data">
-                  <input className="" id="titulo" type="text" placeholder="Titulo" name="title" defaultValue={post.title}/>
-                  <input className="" id="descripcion" type="text" placeholder="Description" name="description"  />
-                  <input className="" type="imagen" placeholder="ImageUrl" name="image"  />
+                  <label className="label" htmlFor="titulo">Nuevo Titulo:</label>
+                  <input className="input" id="titulo" type="text" placeholder="Titulo" name="title" defaultValue={post.title}/>
+                  <label className="label" htmlFor="descripcion">Nueva descripción:</label>
+                  <textarea className="textarea_update" id="descripcion" cols="55" rows="3" type="text" placeholder="Description" name="description" defaultValue={post.description}/>
+                  <label className="label" htmlFor="imagen">Nueva imagen:</label>
+                  <input className="input" id="imagen" type="url" placeholder="ImageUrl" name="image" defaultValue={post.imageurl} />
                 </form>
                 <div className="modal-footer" onClick={(e) => {
                   e.stopPropagation();
@@ -60,8 +75,8 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
                     Cerrar
                   </button>
                   <button
-                    type="button" className="btn-eliminar" onClick={handleUpdate}>
-                    Eliminar
+                    type="button" className="btn-enviar" onClick={handleUpdate}>
+                    Enviar
                   </button>
                 </div>
               </div>

@@ -34,6 +34,7 @@ function AuthProvider({ children }) {
 
       setAuth({ user, token });
     }, 1000);
+   
   }, []);
 
   return (

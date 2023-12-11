@@ -10,20 +10,22 @@
     height: 30px;
 }
 
-#btn-search {
-    width: 100px;
-    height: 35px;
-    align-self: center;
-    margin: 0;
-    padding: 0;
-    border: 2px solid rgba(0, 128, 128, 0.35);
-}
-
 .nav {
     display: inline-flex;
     justify-content: left; 
+    align-items: center;
+}
+
+.nav-item {
+    font-size: 30px;
+    color:  rgba(71, 71, 71, 0.863);
+}
+
+.nav-item:hover {
+    color: #008080;
+    transition: 0.3s;  
 }
 
 li {
-    width: 110px;
+  margin: 15px;  
 }

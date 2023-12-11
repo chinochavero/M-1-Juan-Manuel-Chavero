@@ -98,9 +98,9 @@ form{
 
 .picture {
 	display: flex;
-	justify-content: center;
-	
+	justify-content: center;	
 }
 
-
-
+label {
+	max-width: 200px;	
+}

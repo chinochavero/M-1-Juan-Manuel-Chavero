@@ -21,12 +21,7 @@ const Post = ({ posts, getPost }) => {
         <div>
             <Link to="/post/new" className="btn btn-success">
               Create Post
-            </Link>
-            <input type="search" className="form-control" placeholder="Search" value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-            />
+            </Link>            
             <>
               {filterPosts.map((post) => {
                 return (

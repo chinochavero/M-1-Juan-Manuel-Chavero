@@ -5,16 +5,17 @@ import { AuthContext } from "../providers/AuthProvider";
 import Post from "../components/posteo/Post";
 import NavbarDos from "../components/Navbar/NavigationBar";
 
+
 function PostPage () {
   const [posts, setPosts] = useState([]);
-  
   const { auth } = useContext(AuthContext);
+    if (!auth) return alert("Debes iniciar sesion para ver el contenido")
+   
     
   const getPost = useCallback(() => {
     fetch(`${API_URL}/post`, {
       headers: {
         Authorization: auth.token,
-        
       },
     })
     .then((res) => res.json())
@@ -28,7 +29,7 @@ function PostPage () {
   }, [auth, getPost]);
 
   return (
-    <div>
+    <div className={styles.fondos}>
       <NavbarDos />
       <div className="">
            <h1 className={styles.h1}>Mis Posts</h1>
@@ -38,7 +39,7 @@ function PostPage () {
              </main>
        </div>
     </div>
-  ); 
+  ) 
 };
 
 export default PostPage;

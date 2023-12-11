@@ -10,11 +10,13 @@ const IdPostPage = () => {
     const { postId } = useParams();      
     const [post, setPost] = useState({ author:"", comments:[] });
     const { auth } = useContext(AuthContext);
+    
 
     const getPost = () => {
         fetch(`${API_URL}/post/${postId}`, {
             headers: {
-                Authorization: auth.token,
+              "Content-Type": "application/json",
+               Authorization: auth.token,
             },
         })
         .then((res) => {return res.json()})
@@ -43,7 +45,7 @@ const IdPostPage = () => {
                     <div className="card" id="comment-card">
                         <div className="d-flex justify-content-between align-items-center">
                           <div className="user d-flex flex-row align-items-center">
-                            <img src={comment.author.avatar} width="40" className="user-img rounded-circle mr-2" id="card-image" />
+                            <img src={comment.author.avatar} width="45" className="user-img rounded-circle mr-2" id="card-image" />
                             <span><small className="font-weight-bold text-primary">{comment.author.username}</small> <small className="font-weight-bold">dice: {comment.description}</small></span>          
                           </div>      
                         </div>              

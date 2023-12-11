@@ -5,10 +5,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-
-
-   
-
 function LoginForm() {
   const ref = useRef(null);
 
@@ -20,13 +16,10 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
-
-    const email = formData.get("email") 
-       
+    const email = formData.get("email")
     const password = formData.get("password");
-
+    
     const user = {
       email,
       password,
@@ -53,20 +46,14 @@ function LoginForm() {
     const res = await req.json();
 
     login(res);
-
-   
     navigate("/");
-
-    
   };
-
   return (
-      
-      <div className="container-fluid">
+      <div className="container-fluid" id="master_container">
           <div className="row main-content bg-success text-center">
             <div className="col-md-4 text-center company__info">
               <span className="company__logo"><h2><span className="fa fa-android"></span></h2></span>
-              <h4 className="company_title">Your Company Logo</h4>
+              <h4 className="company_title">Disfruta el viaje!</h4>
             </div>
             <div className="col-md-8 col-xs-12 col-sm-12 login_form ">
               <div className="container-fluid">
@@ -83,19 +70,13 @@ function LoginForm() {
                       <input type="password" className="form-control" id="passLoginInput" placeholder="Password" name="password" />
                       <label htmlFor="passLoginInput" className="form-label">Password</label>
                     </div>
-                    <div className="d-flex justify-content-center">
-                      <div className="box">
-                      <input type="checkbox" className="checkboxLogin" id="check" />
-                      </div>
-                      <label htmlFor="check">Remember Me!</label>
-                    </div>
                     <div className="row">
                       <input type="submit" value="Submit" className="btn" />
                     </div>
                   </form>
                 </div>
                 <div className="row">
-                  <p>Don't have an account? <a href="./Register">Register Here</a></p>
+                  <p>No tienes una cuenta? <a href="./Register">Registrate Aquí</a></p>
                 </div>
               </div>
             </div>

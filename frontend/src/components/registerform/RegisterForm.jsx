@@ -51,7 +51,7 @@ function RegisterForm() {
   };
 
 return (
-  <div className="container-fluid">
+  <div className="container-fluid" id="master_container">
   <div className="row main-content bg-success text-center">
     <div className="col-md-4 text-center company__info">  
       <div className="picture">
@@ -61,7 +61,7 @@ return (
     <div className="col-md-8 col-xs-12 col-sm-12 login_form ">
       <div className="container-fluid">
         <div className="row">
-          <h2>CREATE ACCOUNT</h2>
+          <h2>CREA UNA CUENTA</h2>
         </div>
         <div className="row">
           <form onSubmit={handleSubmit} className="form-group" id="formularioRegister">
@@ -71,7 +71,7 @@ return (
             </div>
             <div className="form-floating mb-3">
               <input type="text" className="form-control" id="userAvatarRegisterInput" placeholder="Avatar" name="avatar" onChange={urlHandler}/>
-              <label htmlFor="userAvatarRegisterInput" className="form-label">Your avatar URL</label>
+              <label htmlFor="userAvatarRegisterInput" className="form-label">Tu avatar URL</label>
             </div>
             <div className="form-floating mb-3">
               <input type="email" className="form-control" id="emailLoginInput" placeholder="Email" name="email" />

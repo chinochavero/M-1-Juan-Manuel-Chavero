@@ -17,7 +17,7 @@ function AppRouter() {
         <Route path="/" element={<HomePage />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/new" element={<NewPost />} />
-        <Route path="post/:postId" element={<IdPostPage />} /> 
+        <Route path="/post/:postId" element={<IdPostPage />} /> 
       </Route>
 
       {/* Rutas Públicas */}

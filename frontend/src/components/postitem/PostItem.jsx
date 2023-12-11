@@ -6,21 +6,27 @@ import { HiOutlineTrash, HiOutlinePencilAlt, HiOutlineChat  } from "react-icons/
 import CreateCommentModal from "../comments/Comments";
 import { AuthContext } from "../../providers/AuthProvider";
 import UpdatePostModel from "../updatepost/UpdatePost";
+import Parrafo from "../comments/CommentBox";
+import CommentBox from "../comments/CommentBox";
 
 
 
-const PostItem = ({ post, getPost, onClick }) => {  
+const PostItem = ({ post, getPost, }) => {  
   const modalId = useId();
   const fechaDeCreacion = new Date(post.createdAt);   
   const creador = post.author.username;
-  
-  // Probando renderizado condicional
   const { auth } = useContext(AuthContext)
-  const [showButtons, setShowButtons] = useState("true");
+  
+  //Condicion para mostrar los botones de editar y eliminar el Post
+  let hideItem = false
+   if (location.pathname === "/allposts") hideItem = true 
+   
+  //Condicion para mostar el boton de comentarios si se esta logeado
+  let hideComment = true 
+   if (auth) hideComment = false
 
-    if (auth) {
       return (
-        <div className="container-box" onClick={onClick}>
+        <div className="container-box" >
       <div className="card" >
           <div>
             <h5 className="card-title">{post.title}</h5>
@@ -32,71 +38,56 @@ const PostItem = ({ post, getPost, onClick }) => {
           <div className="fecha">
              <p className="fecha-text">Creado el {fechaDeCreacion.toLocaleDateString()} por {creador}</p> 
           </div>          
-          <div>
+          <div> 
             <Link onClick={(e)=> {
               e.stopPropagation()
-              }} 
+              }}
+              hidden={hideItem}
               data-bs-toggle="modal"
               data-bs-target={"#update-modal" + post._id}
               style={{ fontSize: "30px", color: "green" }} className="icon-editar">
-            <HiOutlinePencilAlt />
+              <HiOutlinePencilAlt />
             </Link>
+            
             <Link onClick={(e) => {
               e.stopPropagation()
             }}
+              hidden={hideComment}
               data-bs-toggle="modal"
               data-bs-target={"#comment-modal" + post._id}
               style={{ fontSize: "30px", color: "blue" }} className="icon-crear-comentario">
-                <HiOutlineChat />
+              <HiOutlineChat />
             </Link>
             <Link onClick={(e) => {
               e.stopPropagation()
             }}
+              hidden={hideItem}
               data-bs-toggle="modal"
               data-bs-target={"#modal" + post._id}
               style={{ fontSize: "30px", color: "red" }} className="icon-borrar">
-                <HiOutlineTrash />
+              <HiOutlineTrash />
             </Link>                    
-                <DeletePostModel
-                  getPost={getPost}
-                  modalId={modalId}
-                  postId={post._id}
-                />
-            <CreateCommentModal 
-                getPost={getPost}
-                modalId={modalId}
-                postId={post._id}
+              <DeletePostModel
+               getPost={getPost}
+               modalId={modalId}
+               postId={post._id}
               />
-                 <UpdatePostModel 
-                 getPost={getPost}
-                 modalId={modalId}
-                 postId={post._id}
-                 post={post}
-              /> 
-          </div>           
+              <CreateCommentModal 
+               getPost={getPost}
+               modalId={modalId}
+               postId={post._id}
+              />
+              <UpdatePostModel 
+               getPost={getPost}
+               modalId={modalId}
+               postId={post._id}
+               post={post}
+              />
+          </div>
+            <CommentBox post={post}/>          
         </div>
     </div>
-  );
-
-      
-    } else {
-      return (
-        <div className="container-box" onClick={onClick}>
-      <div className="card" >
-          <div>
-            <h5 className="card-title">{post.title}</h5>
-          </div>
-            <img src={post.imageurl} className="card-img-top" alt="..." />
-          <div className="card-body">            
-            <p className="card-text">{post.description}</p>
-          </div>
-          <div className="fecha">
-             <p className="fecha-text">Creado el {fechaDeCreacion.toLocaleDateString()} por {creador}</p> 
-          </div>          
-                    
-        </div>
-    </div>
-  );
-}};
+  )
+};
 
 export default PostItem;
