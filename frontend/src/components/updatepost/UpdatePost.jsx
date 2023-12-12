@@ -8,15 +8,14 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
     const labelId = useId();
     const ref = useRef();
     const { auth } = useContext(AuthContext);
-   
-   
     
     const handleUpdate = () => {
         const formElement = document.getElementById("form_data");
         const formData = new FormData(formElement);
-        const title = formData.get("title")
-        const description = formData.get("description")
-           
+        const title = formData.get("title");
+        const description = formData.get("description");
+        const imageurl = formData.get("image");
+        
         fetch(`${API_URL}/post/${postId}`, {
             method: "PATCH",
             headers: {
@@ -24,9 +23,9 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
                 Authorization: auth.token,   
             },
             body: JSON.stringify({
-                title: formData.get("title"),
+                title: title,
                 description: formData.get("description"),
-                imageurl: formData.get("image"),
+                imageurl: imageurl,
             }),
         })
         .then((res) => {
@@ -38,11 +37,12 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
               title: "Oops...",
               text: "Por favor completa todos los campos",
             });
+            if (!res.ok) return alert("error")
             ref.current.click();
-            getPost();
-           
+            getPost(); 
         })
-    }
+    };
+
     return (
         <div className="modal fade" id={"update-modal" + postId} aria-labelledby={labelId} aria-hidden="true" onClick={(e) => {
             e.stopPropagation();

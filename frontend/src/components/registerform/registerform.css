@@ -104,3 +104,7 @@ form{
 label {
 	max-width: 200px;	
 }
+
+.link {
+	padding-bottom: 10px;	
+}

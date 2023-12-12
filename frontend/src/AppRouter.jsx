@@ -14,13 +14,13 @@ function AppRouter() {
     <Routes>
       {/* Rutas Protegidas */}
       <Route element={<PrivateRoutes />}>
-        <Route path="/" element={<HomePage />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/new" element={<NewPost />} />
         <Route path="/post/:postId" element={<IdPostPage />} /> 
       </Route>
 
       {/* Rutas Públicas */}
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/allposts" element={<AllpostsPage />} />

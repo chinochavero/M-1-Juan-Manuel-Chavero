@@ -4,6 +4,8 @@ import { API_URL } from "../../utils/consts";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function LoginForm() {
   const ref = useRef(null);
@@ -25,9 +27,14 @@ function LoginForm() {
       password,
     };
 
-    if (user.email === "") {
-       return alert()
-      }
+    if (user.email === "" || user.password === "") {
+      return Swal.fire({
+        confirmButtonColor: "#008080",
+        icon: "error",
+        title: "Oops...",
+        text: "Por favor completa todos los campos",
+      })
+    };
  
 
     const req = await fetch(`${API_URL}/login`, {
@@ -40,20 +47,27 @@ function LoginForm() {
 
     if (req.status !== 200) {
       document.getElementById("formularioLogin").reset();
-      return alert("Error al iniciar sesión");
-    }
+      return Swal.fire({
+        title: "Seguro que tienes cuenta?",
+        text: "Alguno de los datos insertados no es correcto",
+        icon: "question",
+        confirmButtonColor: "#008080"
+      })
+    };
 
     const res = await req.json();
 
     login(res);
-    navigate("/");
+    navigate("/post");
   };
   return (
       <div className="container-fluid" id="master_container">
           <div className="row main-content bg-success text-center">
             <div className="col-md-4 text-center company__info">
               <span className="company__logo"><h2><span className="fa fa-android"></span></h2></span>
+              <Link className="link" to="/allposts" title="Mira los posteos">
               <h4 className="company_title">Disfruta el viaje!</h4>
+              </Link>
             </div>
             <div className="col-md-8 col-xs-12 col-sm-12 login_form ">
               <div className="container-fluid">
@@ -76,7 +90,7 @@ function LoginForm() {
                   </form>
                 </div>
                 <div className="row">
-                  <p>No tienes una cuenta? <a href="./Register">Registrate Aquí</a></p>
+                  <p>No tienes una cuenta? <a href="./Register">Registrate aquí</a></p>
                 </div>
               </div>
             </div>

@@ -17,7 +17,8 @@
     width: 220px;
     height: 140px;
     border-width: 1px;
-    border-color: aquamarine;
+    border: 1px solid;
+    object-fit: cover;
 }
 
 .btn_common {
@@ -42,8 +43,7 @@
 
 #btn-create-preview {
     display: inline-block;    
-    margin-left: 75px;    
-    
+    margin-left: 75px;   
 }
 
 .btn_crear {
@@ -56,7 +56,8 @@
     background-color: aqua;
 }
 
-.fondo {
+.fondos {
     background-color: white;
+    padding-bottom: 30px;
 }
 

@@ -5,7 +5,8 @@ import Post from "../components/posteo/Post";
 import styles from "../styles/Post.module.css";
 
 function AllpostsPage() {   
-    const [posts, setPosts] = useState([]); 
+    const [posts, setPosts] = useState([]);
+    
     const getPost = useCallback(() => {
     
     fetch(`${API_URL}/allposts/public`, {
@@ -16,14 +17,18 @@ function AllpostsPage() {
     .then((res) => res.json())
     .then((data) => setPosts(data))
     .catch((err) => console.log(err));
+    });
 
-    })
+    //ordenar los posts
+    posts.reverse()
+  
     useEffect(() => {
         getPost();
+
     }, [])
   
     return (
-    <div>
+    <div className={styles.fondos}>
       <NavbarDos />
       <div className="">
           <h1 className={styles.h1}>Los secretos del viajero</h1>

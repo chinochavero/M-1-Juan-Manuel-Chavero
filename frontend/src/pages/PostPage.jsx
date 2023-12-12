@@ -9,7 +9,7 @@ import NavbarDos from "../components/Navbar/NavigationBar";
 function PostPage () {
   const [posts, setPosts] = useState([]);
   const { auth } = useContext(AuthContext);
-    if (!auth) return alert("Debes iniciar sesion para ver el contenido")
+    if (!auth) return alert("Debes iniciar sesion para que puedas crear contenido")
    
     
   const getPost = useCallback(() => {
@@ -21,7 +21,7 @@ function PostPage () {
     .then((res) => res.json())
     .then((data) => setPosts(data))
     .catch((err) => console.log(err));
-  
+    
   }, [auth.token]);
 
   useEffect(() => {

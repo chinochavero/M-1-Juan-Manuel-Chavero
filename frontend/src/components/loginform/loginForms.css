@@ -91,3 +91,14 @@ form{
 	margin: auto;
 	justify-content: center;
 }
+
+.link {
+	color: white;
+	text-decoration: none;
+	transition: transform 0.2s;
+}
+
+.link:hover {
+	transition: 0.5s ease;
+	transform: scale(1.2);
+}

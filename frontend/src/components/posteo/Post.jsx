@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PostItem from "../postitem/PostItem";
 import { Link, useNavigate } from "react-router-dom";
-import backImage from "../../images/Background_image.jpg"
 import styles from "../../styles/Post.module.css"
 
 const Post = ({ posts, getPost }) => {
@@ -22,7 +21,7 @@ const Post = ({ posts, getPost }) => {
     return (
         <div>
             <Link to="/post/new" className="btn btn-success">
-              Create Post
+              Crear Post
             </Link>
               {filterPosts.map((post) => {
                 return (

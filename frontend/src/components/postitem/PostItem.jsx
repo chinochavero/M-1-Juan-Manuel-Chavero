@@ -1,4 +1,4 @@
-import { useContext, useId, useState } from "react";
+import { useContext, useId } from "react";
 import { Link } from "react-router-dom";
 import DeletePostModel from "../deletepost/DeletePostModel";
 import "./postitem.css";
@@ -6,7 +6,6 @@ import { HiOutlineTrash, HiOutlinePencilAlt, HiOutlineChat  } from "react-icons/
 import CreateCommentModal from "../comments/Comments";
 import { AuthContext } from "../../providers/AuthProvider";
 import UpdatePostModel from "../updatepost/UpdatePost";
-import Parrafo from "../comments/CommentBox";
 import CommentBox from "../comments/CommentBox";
 
 
@@ -15,7 +14,7 @@ const PostItem = ({ post, getPost, }) => {
   const modalId = useId();
   const fechaDeCreacion = new Date(post.createdAt);   
   const creador = post.author.username;
-  const { auth } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext);
   
   //Condicion para mostrar los botones de editar y eliminar el Post
   let hideItem = false

@@ -4,6 +4,7 @@ import { API_URL } from "../utils/consts";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import NavbarDos from "../components/Navbar/NavigationBar";
+import Swal from "sweetalert2";
 
 
 
@@ -17,21 +18,28 @@ const NewPost = () => {
 ;
   const navigate = useNavigate();
 
+// Muestra una preview de la imagen del post, si no hay link muestra una imagen por defecto.
   function urlHandler() {
-    const url = document.getElementById(imageurlId).value;
+    const url = document.getElementById(imageurlId).value
+    if (url === "") {
+      return document.getElementById("preview-image").setAttribute("src", "../../src/images//camera.jpg")
+    } else {
     document.getElementById("preview-image").setAttribute("src", url)
   }
-  
+};
 
   const { auth } = useContext(AuthContext);
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-   
-     if (title === "") return alert("Completar campos")
-     if (description === "") return alert("Completar campos")
-     
+    
+    if (title === "" || description === "") return Swal.fire({
+      confirmButtonColor: "#008080",
+      icon: "error",
+      title: "Oops...",
+      text: "Por favor completa todos los campos",
+    });
     
     fetch(`${API_URL}/post`, {
       method: "POST",
@@ -47,7 +55,7 @@ const NewPost = () => {
   };
 
   return (
-    <div>
+    <div className={styles.fondos}>
       <NavbarDos />
       <h2 className={styles.h1}>Crear un nuevo Post</h2>
       <form onSubmit={handleSubmit} className={styles.login_form}>
@@ -68,7 +76,7 @@ const NewPost = () => {
           <label htmlFor={imageurlId} className="form-label"></label>
         </div>
           <div className={styles.btn_crear}>
-        <img src="" className={styles.previewimage} alt="dasdad" id="preview-image" />
+        <img src="../../src/images//camera.jpg" className={styles.previewimage} alt="Imagen URL" id="preview-image" />
         <button className={styles.btn_common} id={styles["btn-create-preview"]} type="submit" >Crear</button>
         </div>
       </form>

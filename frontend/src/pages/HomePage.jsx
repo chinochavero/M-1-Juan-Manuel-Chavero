@@ -4,14 +4,20 @@ import { Link } from "react-router-dom";
 function HomePage() {
   return (
     <div className={styles.container}>
-      <h1>Home Page</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-        labore placeat repellendus earum eum obcaecati tempora ipsum ab magnam
-        impedit, quod dolores eos soluta voluptatum eveniet fuga eius. Laborum,
-        quasi?
-      </p>
-      <Link to="/post">Go to Posts page</Link>
+      <h3 className={styles.text_welcome}>
+        Aqui es donde tu viaje comienza.<br></br>
+        Vive y conoce al mundo desde la experiencia compartida<br></br>
+        con otros viajeros como tú!.
+      </h3>
+      <h1 className={styles.title}>Hora de volar</h1>
+      <Link className={styles.link} to="/allposts">
+      <button className={styles.btn_home}>Comienza</button>
+      </Link>
+      <Link className={styles.link_register} to="/allposts">
+      <button className={styles.btn_register}>Comienza</button>
+      </Link>
+      
+      <img className={styles.home_img} src="../../src/images/airplane_back.jpg" alt="" />
     </div>
   );
 }

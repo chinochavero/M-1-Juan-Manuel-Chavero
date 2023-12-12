@@ -1,3 +1,4 @@
+import { CommentModel } from "../models/comment.model.js";
 import { PostModel } from "../models/post.model.js";
 import { UserModel } from "../models/user.model.js";
 
@@ -97,11 +98,13 @@ export const ctrlDeletePost = async (req, res) => {
             return res.status(404).json({ error: "Post no encontrado" });
         }
 
+        await CommentModel.deleteMany({ _id: { $in: post.comments } });
+
         await PostModel.findOneAndDelete({ _id: postId, author: userId });
         return res.status(200).json(post);
     } catch (error) {
         return res.status(500).json({ error: error.message })
-    }
+    };
 };
 
 export const ctrlGetAllPost = async (req, res) => {

@@ -2,6 +2,8 @@ import "./registerform.css";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../utils/consts";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 
@@ -33,6 +35,13 @@ function RegisterForm() {
       password,
       email,
     };
+
+    if(username === ""|| avatar === "" || password === "" || email === "") return Swal.fire({
+      confirmButtonColor: "#008080",
+      icon: "error",
+      title: "Oops...",
+      text: "Por favor completa todos los campos",
+    })
     
     const req = await fetch(`${API_URL}/register`, {
       method: "POST",
@@ -85,6 +94,9 @@ return (
               <input type="submit" value="Create" className="btn" />
             </div>
           </form>
+          <div className="link" >
+            <Link to="/login">Volver</Link>
+          </div>
         </div>
       </div>
     </div>

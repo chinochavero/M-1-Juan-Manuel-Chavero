@@ -6,7 +6,7 @@ const CommentBox = ({ post }) => {
          <div>            
           {post.comments.map((comment) => {              
             return (                   
-              <div className="row d-flex justify-content-center" id="comment-container">
+              <div key={comment._id} className="row d-flex justify-content-center" id="comment-container">
                 <div className="col-md-12" id="comment-box">
                   <div className="headings d-flex justify-content-center align-items-center" id="comment-subcon">                  
                     <div className="card" id="comment-card">
