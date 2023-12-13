@@ -34,3 +34,32 @@ export const getCommentValidation = [
 
     applyValidations,
 ];
+
+export const deleteCommentValidation = [
+    param("postId")
+      .notEmpty().withMessage("El parametro no debe estar vacio.")
+      .isString().withMessage("El parametro debe ser un string.")
+      .custom(isValidObjectId).withMessage("El parametro debe ser una id valida."),
+    param("commentId")
+      .notEmpty().withMessage("El parametro no debe estar vacio.")
+      .isString().withMessage("El parametro debe ser un string.")
+      .custom(isValidObjectId).withMessage("El parametro debe ser una id valida."),
+    
+    applyValidations,
+
+];
+
+export const updateCommentValidation = [
+  param("postId")
+    .notEmpty().withMessage("El parametro no debe estar vacio.")
+    .isString().withMessage("El parametro debe ser un string.")
+    .custom(isValidObjectId).withMessage("El parametro { playListId } debe ser una id valida."),
+  param("commentId")
+    .notEmpty().withMessage("El parametro no debe estar vacio.")
+    .isString().withMessage("El parametro debe ser un string.")
+    .custom(isValidObjectId).withMessage("El parametro debe ser una id valida."),
+ 
+  applyValidations,
+
+];
+  

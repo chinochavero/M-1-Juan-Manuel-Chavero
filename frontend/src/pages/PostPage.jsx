@@ -7,6 +7,7 @@ import NavbarDos from "../components/Navbar/NavigationBar";
 
 
 function PostPage () {
+  
   const [posts, setPosts] = useState([]);
   const { auth } = useContext(AuthContext);
     if (!auth) return alert("Debes iniciar sesion para que puedas crear contenido")
@@ -27,7 +28,7 @@ function PostPage () {
   useEffect(() => {
     getPost();
   }, [auth, getPost]);
-
+  
   return (
     <div className={styles.fondos}>
       <NavbarDos />

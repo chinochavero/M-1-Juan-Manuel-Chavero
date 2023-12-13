@@ -83,8 +83,8 @@ const PostItem = ({ post, getPost, }) => {
                post={post}
               />
           </div>
-            <CommentBox post={post}/>          
-        </div>
+            <CommentBox post={post} getPost={getPost} />
+          </div>
     </div>
   )
 };

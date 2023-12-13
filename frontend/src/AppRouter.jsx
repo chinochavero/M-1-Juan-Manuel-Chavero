@@ -7,7 +7,7 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import NewPost from "./pages/NewPostPage";
 import PostPage from "./pages/PostPage";
 import AllpostsPage from "./pages/PostAllPage.jsx";
-import IdPostPage from "./pages/OnePostPage.jsx";
+import CommentBox from "./components/comments/CommentBox.jsx";
 
 function AppRouter() {
   return (
@@ -16,7 +16,8 @@ function AppRouter() {
       <Route element={<PrivateRoutes />}>
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/new" element={<NewPost />} />
-        <Route path="/post/:postId" element={<IdPostPage />} /> 
+        <Route path="/post/:postId" element={<CommentBox />} /> 
+        <Route path="/post/:postId/:commentId" element={<CommentBox />} /> 
       </Route>
 
       {/* Rutas Públicas */}
