@@ -2,9 +2,11 @@ import { API_URL } from "../../utils/consts";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext, useId, useRef } from "react";
 import { Link } from "react-router-dom";
-import { HiOutlineChat } from "react-icons/hi";
+import { HiOutlinePencilAlt, HiOutlineTrash } from "react-icons/hi";
 import "./commenbox.css";
 import CommentUpdate from "./CommentUpdate";
+import CommentDelete from "./CommentDelete";
+import Swal from "sweetalert2";
 
 
 const CommentBox = ({ post, getPost }) => {
@@ -16,23 +18,37 @@ const CommentBox = ({ post, getPost }) => {
  
   
   const handleDeleteComment = (commentId) => {
-    fetch(`${API_URL}/comments/${postId}/${commentId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: auth.token,
-      },
-    }).then((res) => {
-      if (!res.ok) return alert("Error deleting music");
-      getPost(); 
+    Swal.fire({
+      title: "Estás seguro?",
+      text: "Tu comentario se irá para siempre!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DC4C64",
+      cancelButtonColor: "#7a7a7a",
+      confirmButtonText: "Si, borralo!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${API_URL}/comments/${postId}/${commentId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: auth.token,
+          }}),
+          Swal.fire({
+          title: "Borrado!",
+          text: "Tu comentario a sido eliminado.",
+          icon: "success",
+        });
+        getPost();
+      }
     });
-  };
+  }
+
 
   const handleEditComment = (commentId) => {
     const formElement = document.getElementById("comment-form")
     const formData = new FormData(formElement);
     const description = formData.get("description")
     
-
     fetch(`${API_URL}/comments/${postId}/${commentId}`, {
       method: "PUT",
       headers: {
@@ -67,18 +83,22 @@ const CommentBox = ({ post, getPost }) => {
                               e.stopPropagation()
                               }}
                               data-bs-toggle="modal"
-                              data-bs-target={"#comment_update" + post._id}
-                              style={{ fontSize: "30px", color: "blue" }} className="icon-crear-comentario">
-                               
-                                   <HiOutlineChat />
+                              data-bs-target={"#comment_update" + comment._id}
+                              style={{ fontSize: "15px", color: "green" }} className="icon-crear-comentario">
+                              <HiOutlinePencilAlt />
                               </Link>
+                              <button style={{ fontSize: "15px", color: "red" }} className="btn-delete-comment">
+                              <HiOutlineTrash onClick={(e) => {
+                               e.stopPropagation(); handleDeleteComment(comment._id)}}/>
+                              </button>
                               <CommentUpdate
                               post={post}
                               getPost={getPost}
                               modalId={modalId}
                               postId={post._id}
+                              commentId={comment._id}
                                 />
-                              </div>
+                            </div>
                           </div>      
                         </div>              
                     </div>

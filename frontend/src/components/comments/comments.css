@@ -49,3 +49,16 @@
     justify-content: center;
     align-items: center;
 }
+
+#form-comment-update {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.btn-delete-comment {
+    background-color: transparent;
+    border: none;
+    padding-bottom: 5px;   
+}
+

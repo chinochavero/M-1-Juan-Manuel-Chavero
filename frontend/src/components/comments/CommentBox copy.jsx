@@ -1,12 +1,19 @@
 import { API_URL } from "../../utils/consts";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useContext } from "react";
+import { useContext, useId, useRef } from "react";
+import { Link } from "react-router-dom";
+import { HiOutlineChat } from "react-icons/hi";
 import "./commenbox.css";
+import CommentUpdate from "./CommentUpdate";
+import CommentDelete from "./CommentDelete";
 
 
 const CommentBox = ({ post, getPost }) => {
   const { auth } = useContext(AuthContext);
   const postId = post._id
+  const labelId = useId();
+  const ref = useRef(null);
+  const modalId = useId();
  
   
   const handleDeleteComment = (commentId) => {
@@ -54,24 +61,44 @@ const CommentBox = ({ post, getPost }) => {
                   <div className="headings d-flex justify-content-center align-items-center" id="comment-subcon">                  
                     <div className="card" id="comment-card">
                         <div className="d-flex justify-content-between align-items-center">
-                          <div className="user d-flex flex-row align-items-center" id="comment_bx">
+                          <div className="user d-flex flex-row align-items-center" id="comment_bx" >
                             <img src={comment.author.avatar} width="40" className="user-img rounded-circle mr-2" id="comment-image" />
-                            <span><small className="font-weight-bold text-primary">{comment.author.username}</small> <small className="font-weight-bold">dice: {comment.description}</small></span>  
-                              <div>
-                             
-                                {/* <button onClick={(e) => {e.stopPropagation(); handleDeleteComment(comment._id)}}>Borrar</button>
-                                  <form id="comment-form">
-                                  <input id="input_comment" type="text" name="description" />
-                                  <button onClick={(e) => {e.stopPropagation(); handleEditComment(comment._id)}}>Editar</button>
-                                  </form> */}
+                            <span><small className="font-weight-bold text-primary">{comment.author.username}</small> <small className="font-weight-bold">dice: {comment.description}</small></span>
+                              <Link onClick={(e) => {
+                              e.stopPropagation()
+                              }}
+                              data-bs-toggle="modal"
+                              data-bs-target={"#comment_update" + comment._id}
+                              style={{ fontSize: "30px", color: "blue" }} className="icon-crear-comentario">
+                                <HiOutlineChat />
+                              </Link>
+                              <Link onClick={(e) => {
+                              e.stopPropagation()
+                              }}
+                              data-bs-toggle="modal"
+                              data-bs-target={"#comment_delete" + comment._id}
+                              style={{ fontSize: "30px", color: "blue" }} className="icon-crear-comentario">
+                              <HiOutlineChat />
+                              </Link>
+                              <CommentUpdate
+                              post={post}
+                              getPost={getPost}
+                              modalId={modalId}
+                              postId={post._id}
+                              commentId={comment._id}
+                                />
+                              <CommentDelete 
+                              post={post}
+                              getPost={getPost}
+                              commentId={comment._id}
+                                />
                               </div>
                           </div>      
                         </div>              
                     </div>
                   </div>
                 </div>
-              </div>
-           )})}      
+                )})}      
          </div>
     
     )
