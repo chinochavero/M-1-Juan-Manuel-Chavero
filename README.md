@@ -1,10 +1,15 @@
-Entrego el trabajo a corregir para continuarlo.
-Se uso de modelo el repositorio de Playlist que se trabajo en clase.
+El proyecto se basa en el concepto de poder compartir e intercambiar vivencias que una persona experimenta mientras viaja a 
+distintos lugares y hace exploración de los mismos. A través de la aplicacion web, los usuarios pueden realizar posteos de sus viajes
+o exponer sus expriencias e ideas para que otros viajeros puedan conocer y compartir esas mismas experiencias. La interacción se
+complementa con comentarios de usuarios a otros usuarios en sus posteos.
 
-Se presentaron algunas complicaciones como: vincular los comentarios con los posteos correspondientes y 
-el de poder utilizar la modularizacion con css y bootstrap.(No me tomaba las clases). Esto se resolvio
-creando carpetas para separar cada componente con su respectivo archivo css.
+Para inicializar la aplicacion hay que ejecutar en la terminal:
+- npm i (para instalar todos los paquetes necesarios para la ejecucion de la aplicacion).
+Luego:
+- npm run dev (tanto en el backend como en el frontend), es decir, tienen que estar los dos funcionando al mismo tiempo.
+Aclaracion: hay que tener instalado MongoDB.
 
-Se implementaron algunos cambios como: el boton de logout que borra del localstorage  el token de validacion,
-en el "Register" se muestra la imagen de avatar a la izquierda, una vez que se coloca la url de imagen en
-el input, sin tener que hacer submit. 
+Detalles:
+- Cualquier persona puede acceder a ver (contenido de lectura) sin necesidad de estar registrado.
+- Solo las personas registradas pueden acceder a los componentes de editar y eliminar.
+- Solo el creador del comentario puede acceder a los botones para editar o eliminar su propio comentario (a traves de renderizado condicional) 
