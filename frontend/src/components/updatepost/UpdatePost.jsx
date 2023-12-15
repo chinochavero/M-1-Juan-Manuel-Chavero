@@ -1,4 +1,4 @@
-import { useContext, useId, useRef } from "react";
+import { useContext, useId, useRef, useState } from "react";
 import { API_URL } from "../../utils/consts";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -8,15 +8,14 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
     const labelId = useId();
     const ref = useRef();
     const { auth } = useContext(AuthContext);
+
+    // useState porque los valores se me resetean solos al usar FormData
+    const [title, setTitle] = useState(post.title);
+    const [description, setDescription] = useState(post.description);
+    const [imageurl, setImageurl] = useState(post.imageurl);
     
     const handleUpdate = () => {
-        const formElement = document.getElementById("form_data");
-        const formData = new FormData(formElement);
-        const title = formData.get("title");
-        const description = formData.get("description");
-        const imageurl = formData.get("image");
-        
-        fetch(`${API_URL}/post/${postId}`, {
+      fetch(`${API_URL}/post/${postId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -24,7 +23,7 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
             },
             body: JSON.stringify({
                 title: title,
-                description: formData.get("description"),
+                description: description,
                 imageurl: imageurl,
             }),
         })
@@ -62,11 +61,11 @@ const UpdatePostModel = ({ post, postId, getPost }) => {
                 </div>
                 <form className="modal-body" id="form_data">
                   <label className="label" htmlFor="titulo">Nuevo Titulo:</label>
-                  <input className="input" id="titulo" type="text" placeholder="Titulo" name="title" defaultValue={post.title}/>
+                  <input className="input" id="titulo" type="text" placeholder="Titulo" name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
                   <label className="label" htmlFor="descripcion">Nueva descripción:</label>
-                  <textarea className="textarea_update" id="descripcion" cols="55" rows="3" type="text" placeholder="Description" name="description" defaultValue={post.description}/>
+                  <textarea className="textarea_update" id="descripcion" cols="55" rows="3" type="text" placeholder="Description" name="description" value={description} onChange={(e) => setDescription(e.target.value)}/>
                   <label className="label" htmlFor="imagen">Nueva imagen:</label>
-                  <input className="input" id="imagen" type="url" placeholder="ImageUrl" name="image" defaultValue={post.imageurl} />
+                  <input className="input" id="imagen" type="url" placeholder="ImageUrl" name="image" value={imageurl} onChange={(e) => setImageurl(e.target.value)} />
                 </form>
                 <div className="modal-footer" onClick={(e) => {
                   e.stopPropagation();

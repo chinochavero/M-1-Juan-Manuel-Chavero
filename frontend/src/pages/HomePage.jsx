@@ -13,10 +13,6 @@ function HomePage() {
       <Link className={styles.link} to="/allposts">
       <button className={styles.btn_home}>Comienza</button>
       </Link>
-      <Link className={styles.link_register} to="/allposts">
-      <button className={styles.btn_register}>Comienza</button>
-      </Link>
-      
       <img className={styles.home_img} src="../../src/images/airplane_back.jpg" alt="" />
     </div>
   );

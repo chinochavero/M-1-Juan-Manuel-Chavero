@@ -15,7 +15,7 @@ const CommentDelete = ({ post, getPost, commentId }) => {
           },
         })
         .then((res) => {
-          if (!res.ok) return alert("Error deleting music");
+          if (!res.ok) return alert("Error al borrar el comentario");
           getPost(); 
         });
       };

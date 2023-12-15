@@ -19,7 +19,7 @@ function AllpostsPage() {
     .catch((err) => console.log(err));
     });
 
-    //ordenar los posts
+    //ordenar los posts de más nuevos a más viejos.
     posts.reverse()
   
     useEffect(() => {

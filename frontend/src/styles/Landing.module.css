@@ -19,8 +19,8 @@
     background-image: linear-gradient(45deg, #bbdae4, #00008b);
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    
 }
+
 
 .text_welcome {
     display: flex;
@@ -70,4 +70,3 @@
 .btn_home:hover {
     transform: scale(1.2);
 }
-  

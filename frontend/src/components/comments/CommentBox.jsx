@@ -1,24 +1,25 @@
 import { API_URL } from "../../utils/consts";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useContext, useId, useRef } from "react";
+import { useContext, useId } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlinePencilAlt, HiOutlineTrash } from "react-icons/hi";
 import "./commenbox.css";
 import CommentUpdate from "./CommentUpdate";
-import CommentDelete from "./CommentDelete";
 import Swal from "sweetalert2";
+
 
 
 const CommentBox = ({ post, getPost }) => {
   const { auth } = useContext(AuthContext);
   const postId = post._id
-  const labelId = useId();
-  const ref = useRef(null);
   const modalId = useId();
- 
   
   const handleDeleteComment = (commentId) => {
-    Swal.fire({
+    const comment = post.comments.find((comment) => comment._id === commentId);
+      if (comment.author._id !== auth.user._id) {
+        return console.log("error")
+  } else {
+      Swal.fire({
       title: "Estás seguro?",
       text: "Tu comentario se irá para siempre!",
       icon: "warning",
@@ -41,32 +42,7 @@ const CommentBox = ({ post, getPost }) => {
         getPost();
       }
     });
-  }
-
-
-  const handleEditComment = (commentId) => {
-    const formElement = document.getElementById("comment-form")
-    const formData = new FormData(formElement);
-    const description = formData.get("description")
-    
-    fetch(`${API_URL}/comments/${postId}/${commentId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: auth.token,
-      },
-      body: JSON.stringify({
-        description: description,
-      }),
-    })
-    .then((res) => {
-      if (!res.ok) return alert("");
-      
-    });
-   
-  };
-
-  
+  }}
   return (
          <div>            
           {post.comments.map((comment) => {              
@@ -77,8 +53,12 @@ const CommentBox = ({ post, getPost }) => {
                     <div className="card" id="comment-card">
                         <div className="d-flex justify-content-between align-items-center">
                           <div className="user d-flex flex-row align-items-center" id="comment_bx" >
-                            <img src={comment.author.avatar} width="40" className="user-img rounded-circle mr-2" id="comment-image" />
+                            <img src={comment.author.avatar} width="40" height="40" className="user-img rounded-circle mr-2" id="comment-image" />
                             <span><small className="font-weight-bold text-primary">{comment.author.username}</small> <small className="font-weight-bold">dice: {comment.description}</small></span>
+                             {/* Renderizado condicional de los botones para editar y eliminar comentarios con auth para evitar el problema de no poder leer las
+                             propiedades de user en la pagina publica */}
+                              {auth && comment.author._id === auth.user._id && (
+                                <>
                               <Link onClick={(e) => {
                               e.stopPropagation()
                               }}
@@ -86,11 +66,12 @@ const CommentBox = ({ post, getPost }) => {
                               data-bs-target={"#comment_update" + comment._id}
                               style={{ fontSize: "15px", color: "green" }} className="icon-crear-comentario">
                               <HiOutlinePencilAlt />
-                              </Link>
+                              </Link> 
+                              {comment.author._id === auth.user._id && (
                               <button style={{ fontSize: "15px", color: "red" }} className="btn-delete-comment">
                               <HiOutlineTrash onClick={(e) => {
                                e.stopPropagation(); handleDeleteComment(comment._id)}}/>
-                              </button>
+                              </button> )}
                               <CommentUpdate
                               post={post}
                               getPost={getPost}
@@ -98,12 +79,14 @@ const CommentBox = ({ post, getPost }) => {
                               postId={post._id}
                               commentId={comment._id}
                                 />
-                            </div>
-                          </div>      
-                        </div>              
-                    </div>
+                               </>
+                            )}
+                          </div>
+                        </div>      
+                    </div>              
                   </div>
                 </div>
+            </div>
                 )})}      
          </div>
     

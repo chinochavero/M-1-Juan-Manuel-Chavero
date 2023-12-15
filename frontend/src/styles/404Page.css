@@ -1,0 +1,19 @@
+.not-found-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 50px 50px;
+    background-color: white;
+}
+  
+.not-found-title {
+    font-size: 3rem;
+}
+  
+.not-found-text {
+    font-size: 1.2rem;
+}
+  
+.not-found-link {
+    text-decoration: none;
+    color: #007bff;
+}

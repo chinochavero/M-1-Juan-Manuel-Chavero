@@ -5,25 +5,12 @@ import "./comments.css";
 
 
 const CommentUpdate = ({ post, getPost, commentId }) => {
-  const [ comentario, setComentario ] = useState()
+  const [ comentario, setComentario ] = useState("")
   const { auth } = useContext(AuthContext);
   const postId = post._id
   const labelId = useId();
   
-  // const handleDeleteComment = (commentId) => {
-  //   fetch(`${API_URL}/comments/${postId}/${commentId}`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       Authorization: auth.token,
-  //     },
-  //   }).then((res) => {
-  //     if (!res.ok) return alert("Error deleting music");
-  //     getPost(); 
-  //   });
-  // };
-
   const handleEditComment = (commentId) => {
-    
     fetch(`${API_URL}/comments/${postId}/${commentId}`, {
       method: "PUT",
       headers: {
@@ -60,7 +47,7 @@ const CommentUpdate = ({ post, getPost, commentId }) => {
                       </div>
                       <form className="modal-body" id="form-comment-update" >
                         <label className="label" htmlFor="descripcion">Editar comentario:</label>
-                        <textarea className="textarea_update" id="descripcion" cols="55" rows="3" type="text" placeholder="Comentario" name="description" defaultValue={comentario} onChange={(e) => {setComentario(e.target.value)}} />
+                        <textarea className="textarea_update" id="descripcion" cols="55" rows="3" type="text" placeholder="Comentario" name="description" value={comentario} onChange={(e) => {setComentario(e.target.value)}} />
                       </form>
                       <div className="modal-footer" onClick={(e) => {
                         e.stopPropagation();
@@ -69,7 +56,7 @@ const CommentUpdate = ({ post, getPost, commentId }) => {
                           Cerrar
                         </button>
                         <button
-                          type="button" className="btn-submit" onClick={(e) => {e.stopPropagation(); handleEditComment(commentId)}} >
+                          type="button" className="btn-submit" onClick={() => handleEditComment(commentId)} data-bs-dismiss="modal" >
                           Enviar
                         </button>
                       </div>

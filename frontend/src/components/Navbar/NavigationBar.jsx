@@ -8,8 +8,8 @@ import { useContext } from "react";
 
 const NavbarDos = () => {
   const { logout } = useContext(AuthContext)
-
-    return (
+  
+  return (
         <div className="container-fluid">
         <nav className="navbar bg-body-tertiary" id="navbar-container">
         <div className="container-fluid">
